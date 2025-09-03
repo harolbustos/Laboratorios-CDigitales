@@ -33,7 +33,7 @@
 ## Flujo de trabajo
 ### Tener ramas para cada laboratorio por integrante
 
-## <img width="512" height="512" alt="image" src="https://github.com/user-attachments/assets/2c6aecfe-1863-43ce-8dd0-6853c8c20a9f" />
+## <img width="40" height="40" alt="image" src="https://github.com/user-attachments/assets/2c6aecfe-1863-43ce-8dd0-6853c8c20a9f" />
  Importante
  ### Crear token para poder realizar un push
  1. Settings -> Developer settings
