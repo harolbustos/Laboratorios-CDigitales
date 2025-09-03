@@ -26,9 +26,6 @@ periodo_muestreo_PAMi = 1/frecuencia_muestreo_PAMi;
 ciclo_trabajo_instantaneo = 0.2;
 tao_instantaneo = ciclo_trabajo_instantaneo/frecuencia_muestreo_PAMi;
 
-%Creación del tren de pulsos rectangulares instantaneo
-pulso_rectangular_instantaneo = 0.5*square(2*pi*frecuencia_muestreo_PAMi*tiempo, ciclo_trabajo_instantaneo*100)+0.5;
-
 %Cada cuánto tiempo muestreamos la señal (en índices) (200us/10us = 20
 %cada 20 muestras se toma el valor de m(t)
 paso_muestras = round(periodo_muestreo_PAMi / periodo_muestreo_simulacion);
@@ -70,35 +67,30 @@ title('Comparación: PAM natural vs PAM instantáneo');
 
 % 1) Realizar tranformada de fourier sobre las tres señales
 
-M = fft(m); % tranformada de fourier
-fs = 5000; % frecuencia de muestreo
-f = (0:length(M)-1)*fs/length(M);
+fs = 1/periodo_muestreo_simulacion; % frecuencia de muestreo
+N = length(m);                      % numero de muestras
 
+% --- FFT señal original ---
+M = fft(m);
+f = (0:N-1)*(fs/N);
+f_pos = f(1:N/2);
+M_pos = abs(M(1:N/2));
 
+% --- FFT PAM natural ---
+M2 = fft(PAM_natural);
+M2_pos = abs(M2(1:N/2));
+
+% --- FFT PAM instantáneo ---
+M3 = fft(PAM_instantaneo);
+M3_pos = abs(M3(1:N/2));
+
+% --- Gráfica comparativa ---
 figure;
-plot(f,abs(M))
-xlabel('Frequency (Hz)')
-ylabel('Magnitude')
-title('FFT señal original')
-
-% Fourier PAM natural
-M2 = fft(PAM_natural); % tranformada de fourier
-f = (0:length(M2)-1)*fs/length(M2); 
-
-figure;
-plot(f,abs(M2))
-xlabel('Frequency (Hz)')
-ylabel('Magnitude')
-title('FFT PAM natural')
-
-% Fourier PAM instantaneo
-M3 = fft(PAM_instantaneo); % tranformada de fourier
-f = (0:length(M3)-1)*fs/length(M3); 
-
-figure;
-plot(f,abs(M3))
-xlabel('Frequency (Hz)')
-ylabel('Magnitude')
-title('FFT PAM instantaneo')
-
-%LINEA DE TESTEO%
+plot(f_pos, M_pos, 'b', 'LineWidth', 1.2); hold on;
+plot(f_pos, M2_pos, 'r', 'LineWidth', 1);
+plot(f_pos, M3_pos, 'g', 'LineWidth', 1);
+xlabel('Frecuencia [Hz]');
+ylabel('Magnitud');
+legend('Señal original m(t)', 'PAM natural', 'PAM instantáneo');
+title('FFT comparativa de señales');
+grid on;
