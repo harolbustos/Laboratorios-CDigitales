@@ -34,8 +34,7 @@
 ### Tener ramas para cada laboratorio por integrante
 
 <img width="50" height="50" alt="image" src="https://github.com/user-attachments/assets/63f5ca18-cffd-4174-bf30-43e5af467c75" />
-
- Importante
+ ## Importante
  ### Crear token para poder realizar un push
  1. Settings -> Developer settings
  2. Personal access tokens' -> Tokens(classic)
