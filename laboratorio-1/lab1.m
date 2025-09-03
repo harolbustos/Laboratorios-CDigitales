@@ -100,3 +100,5 @@ plot(f,abs(M3))
 xlabel('Frequency (Hz)')
 ylabel('Magnitude')
 title('FFT PAM instantaneo')
+
+%LINEA DE TESTEO%
